@@ -1074,6 +1074,11 @@
 
   var Tooltip = function (element, options) {
     this.init('tooltip', element, options)
+    $(element).on('show', function(e) {
+      e.stopPropagation();
+    }).on('hidden', function(e) {
+      e.stopPropagation();
+    });
   }
 
   Tooltip.prototype = {
@@ -1277,12 +1282,11 @@
           $tip.detach()
         })
       }
-
       $.support.transition && this.$tip.hasClass('fade') ?
         removeWithAnimation() :
         $tip.detach()
 
-      this.$element.trigger('hidden')
+        this.$element.trigger('hidden')
 
       return this
     }
@@ -1425,7 +1429,12 @@
   * =============================== */
 
   var Popover = function (element, options) {
-    this.init('popover', element, options)
+    this.init('popover', element, options);
+    $(element).on('show', function(e) {
+      e.stopPropagation();
+    }).on('hidden', function(e) {
+       e.stopPropagation();
+    });
   }
 
 
